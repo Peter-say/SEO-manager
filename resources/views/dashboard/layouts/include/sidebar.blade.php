@@ -1,6 +1,6 @@
  <!-- Menu -->
 
- <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="index.html" class="app-brand-link">
             <span class="app-brand-logo demo">
@@ -73,31 +73,38 @@
                 <div data-i18n="Layouts">URL Inspection</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a href="{{route('dashboard.users.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div data-i18n="Layouts">App Users</div>
+            </a>
+        </li>
 
         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Pages</span>
+            <span class="menu-header-text">Blog</span>
         </li>
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Account Settings</div>
+                <div data-i18n="Account Settingss">Blog</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="pages-account-settings-account.html" class="menu-link">
-                        <div data-i18n="Account">Account</div>
+                    <a href="{{route('blog.index')}}" class="menu-link">
+                        <div>Index</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="pages-account-settings-notifications.html" class="menu-link">
-                        <div data-i18n="Notifications">Notifications</div>
+                    <a href="{{route('blog.create')}}" class="menu-link">
+                        <div>Create New</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="pages-account-settings-connections.html" class="menu-link">
-                        <div data-i18n="Connections">Connections</div>
+                    <a href="{{route('dashboard.file-upload.create')}}" class="menu-link">
+                        <div>Upload New File</div>
                     </a>
                 </li>
+                
             </ul>
         </li>
         <li class="menu-item">

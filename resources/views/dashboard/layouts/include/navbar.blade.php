@@ -55,7 +55,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{route('dashboard.user.profile')}}">
                             <i class="bx bx-user me-2"></i>
                             <span class="align-middle">My Profile</span>
                         </a>
@@ -80,12 +80,12 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <form action="{{ route('logout') }}" method="post">@csrf
-                             @method('POST') 
-                        <button class="dropdown-item" href="{{ route('logout') }}">
-                            <i class="bx bx-power-off me-2"></i>
-                            <span class="align-middle">Log Out</span>
-                        </button>
+                        <form action="{{ route('logout') }}" method="post">
+                            @method('POST') @csrf
+                            <button type="submit" class="dropdown-item" href="{{ route('logout') }}">
+                                <i class="bx bx-power-off me-2"></i>
+                                <span class="align-middle">Log Out</span>
+                            </button>
                         </form>
                     </li>
                 </ul>

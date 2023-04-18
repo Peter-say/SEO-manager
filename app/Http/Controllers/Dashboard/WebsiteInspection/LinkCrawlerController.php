@@ -2,33 +2,57 @@
 
 namespace App\Http\Controllers\Dashboard\WebsiteInspection;
 
+use App\crawler;
 use App\Http\Controllers\Controller;
-use App\WebsiteObservers\CustomObserver;
+use App\Website\WebCrawler;
+use DOMDocument;
 use Illuminate\Http\Request;
-use Spatie\Crawler\Crawler;
+
+
 
 class LinkCrawlerController extends Controller
 {
-    // public function __construct(CustomObserver  $observers)
-    // {
-    //     $this->observers = $observers;
-    // }
-
-    public static function handle($website_url = null)
+    public function __construct(crawler  $crawler)
     {
-        
-        $website_url = 'https://www.myschoolupdates.blog/';
-        Crawler::create()
-        ->setCrawlObserver(new CustomObserver)
-        ->startCrawling($url);
-        dd($website_url);
-    } 
-    
+        $this->crawler = $crawler;
+    }
+
     public function linkChecker()
     {
-      
-        $items = $this->handle();
-        // dd($items);
-        return view('dashboard.links.index' , compact($items));
+        //  $fetch_link = Crawler::crawl_page($depth = 5);
+        //  dd($fetch_link);
+        return view('dashboard.links.index');
+    }
+
+    public function getUrl(Request $request, $url = null)
+    {
+
+
+        // $output = WebCrawler::crawler($request);
+        $data = $request->validate(['web_url' => 'required|url']);
+        $url = $request->input('web_url');
+        // Initialize curl
+        $ch = curl_init();
+
+        // URL for Scraping
+        $web_url = curl_setopt($ch, CURLOPT_URL, $url);
+
+        // Set the HTTP method
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, $web_url);
+
+
+        if (self::getUrl($request, $url))
+            echo "Link Works";
+        else
+            echo "Broken Link";
+
+        $response = curl_exec($ch);
+
+        // Closing cURL
+        curl_close($ch);
+
+        return back()->with('success_message', 'Crawled Successfully');
     }
 }

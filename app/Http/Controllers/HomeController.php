@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
+use App\SEO\Metadata;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,20 +24,18 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    // public function check_url($url)
-    // {
-    //     $headers = @get_headers($url);
-    //     $headers = is_array($headers) ? implode("\n", $headers) : $headers;
-    //     return (bool) preg_match('#HTTP/.*\s+[(200|301|302)] + \s#i', $headers); 
-    // }
 
     public function index()
     {
-             return view('dashboard.home', [
-            
-        ]);
+        $metaData = Metadata::DEFALT_META_DESCRIPTION;
+        $blogs = Blog::get();
+        return view('dashboard.home', compact('metaData' , 'blogs'));
     }
 
-   
-   
+    public function generalView($meta_description)
+    {
+        $blog = Blog::first();
+        $meta_description = Metadata::onPageMetadata($meta_description);
+        return view('dashboard.layouts.app2', compact('meta_description'));
+    }
 }

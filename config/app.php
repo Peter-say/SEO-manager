@@ -1,5 +1,7 @@
 <?php
 
+use App\SEO\Metadata;
+
 return [
 
     /*
@@ -14,6 +16,9 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    
+
+    'meta_description' =>  Metadata::DEFALT_META_DESCRIPTION,
 
     /*
     |--------------------------------------------------------------------------

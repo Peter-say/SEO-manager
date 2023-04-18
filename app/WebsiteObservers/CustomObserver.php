@@ -66,4 +66,4 @@ class CustomObserver extends CrawlObserver
     }
 
     
-}
+} 
