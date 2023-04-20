@@ -10,7 +10,7 @@
 
   #{$parent}.dropdown-menu > li:not(.disabled) > a:not(.dropdown-item):active,
   #{$parent}.dropdown-menu > li.active:not(.disabled) > a:not(.dropdown-item) {
-    background-color: $background;
+  background-color: $background;
     color: if($color, $color, color-contrast($background)) !important;
   }
 }

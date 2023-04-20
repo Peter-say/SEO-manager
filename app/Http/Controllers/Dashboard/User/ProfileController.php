@@ -7,42 +7,42 @@ use App\ImageFile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
     public function index()
     {
-        $user =  Auth::user();
-        $id = $user->id;
-        return view('dashboard.user.profile', compact('user', 'id'));
+        $user = Auth::user();
+        return view('dashboard.user.profile', compact('user'));
     }
-    public function update(Request $request, User $user)
+
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     * 
+     */
+
+    public function update(Request $request, $id)
     {
-       
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'picture' => 'nullable|image',
-            'phone' => 'required|string',
-            'address' => 'nullable|string',
-            'state' => 'nullable|string',
-            'zip_code' => 'nullable|string',
-            'country' => 'nullable|string',
-        ]);
 
 
-       $user->where('id',$user)->update([
-            $picture_path = ImageFile::saveImageRequest($request->picture, 'ProfilePictures', $request),
-            'picture' => $picture_path,
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'phone_number' => $request->input('phone_number'),
-            'address' => $request->input('address'),
-            'state' => $request->input('state'),
-            'zip_code' => $request->input('zip_code'),
-            'country' => $request->input('country'),
-        ]);
-        dd($user);
+        if ($request->hasFile('picture')) {
+            $picture_path = ImageFile::saveImageRequest($request->picture, 'ProfilePictures', $request);
+            $data['picture'] = $picture_path;
+        }
+
+        $data =  User::findOrFail($id)->firstOrfail();
+        $user = [
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'state' => $request->state,
+            'zip_code' => $request->zip_code,
+            'country' => $request->country,
+            // dd($request->all()),
+        ];
+        $data->update($user);
 
         return back()->with('success_message', 'Profile Updated successfully');
     }

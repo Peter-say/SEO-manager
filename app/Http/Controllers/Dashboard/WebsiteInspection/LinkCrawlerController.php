@@ -12,10 +12,6 @@ use Illuminate\Http\Request;
 
 class LinkCrawlerController extends Controller
 {
-    public function __construct(crawler  $crawler)
-    {
-        $this->crawler = $crawler;
-    }
 
     public function linkChecker()
     {
@@ -26,7 +22,6 @@ class LinkCrawlerController extends Controller
 
     public function getUrl(Request $request, $url = null)
     {
-
 
         // $output = WebCrawler::crawler($request);
         $data = $request->validate(['web_url' => 'required|url']);

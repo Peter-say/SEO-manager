@@ -26,14 +26,15 @@
                 <div>
                     @include('notifications.flash_messages')
                 </div>
-                <form enctype="multipart/form-data" action="{{route('dashboard.user.profile.update', $id)}}"method="post">
+                <form enctype="multipart/form-data"
+                    action="{{ route('dashboard.user.profile.update', [ 'id' => $user->id ]) }}"method="post">
                     @csrf @method('PUT')
                     <div class="card mb-4">
                         <h5 class="card-header">Profile Details</h5>
                         <!-- Account -->
                         <div class="card-body">
                             <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                <img src="{{ $dashboards_assets }}/img/avatars/1.png" alt="user-avatar"
+                                <img src="{{ asset($user->picture) }}" alt="user-avatar"
                                     class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                                 <div class="button-wrapper">
                                     <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
@@ -56,13 +57,13 @@
                             <div class="row">
                                 <div class="mb-3 col-md-6">
                                     <label for="name" class="form-label">Name</label>
-                                    <input class="form-control" type="text" id="name" name="name"
+                                    <input disabled class="form-control" type="text" id="name" name="name"
                                         value="{{ $user->name }}" autofocus />
                                 </div>
 
                                 <div class="mb-3 col-md-6">
                                     <label for="email" class="form-label">E-mail</label>
-                                    <input class="form-control" type="text" id="email" name="email"
+                                    <input disabled class="form-control" type="text" id="email" name="email"
                                         value="{{ $user->email }}" placeholder="Enter you email" />
                                 </div>
 

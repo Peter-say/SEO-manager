@@ -8,8 +8,12 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-   public function index(){
-    $users = User::all();
-    return view('dashboard.users.index', compact('users'));
+   public function index()
+   {
+      $this->authorize(ability: 'view' , arguments:User::class);
+
+      $users = User::all();
+      return view('dashboard.users.index', compact('users'));
    }
+
 }

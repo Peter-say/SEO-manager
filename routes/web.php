@@ -3,8 +3,8 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Web\CommentController;
-use App\Http\Controllers\Dashboard\ImageController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\SettingsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// web routes
+
 Route::get('/', function () {
   return view('welcome');
 });
@@ -28,6 +30,9 @@ Route::prefix('web')->as('web.')->group( function() {
   Route::get('blog/{blog:blog_url}' ,[App\Http\Controllers\Web\BlogController::class, 'details'])->name('blog');
 
 });
+
+
+//dashboards routes
 
 Auth::routes();
 
@@ -39,15 +44,20 @@ Route::prefix('dashboard')->as('dashboard.')->group(function () {
 
   Route::prefix('users')->as('users.')->group(function () {
     Route::get('/', [App\Http\Controllers\Dashboard\UsersController::class, 'index'])->name('index');
+    Route::get('users/role/{id}', [App\Http\Controllers\Dashboard\RoleController::class, 'role'])->name('role.update');
   });
 
   // Single User //
   Route::prefix('user')->as('user.')->group(function () {
-    Route::get('/', [App\Http\Controllers\Dashboard\User\ProfileController::class, 'index'])->name('profile');
-    Route::put('/profile/update', [App\Http\Controllers\Dashboard\User\ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile', [App\Http\Controllers\Dashboard\User\ProfileController::class, 'index'])->name('profile');
+    Route::put('/profile/update/{id}', [App\Http\Controllers\Dashboard\User\ProfileController::class, 'update'])->name('profile.update');
   });
 
-  Route::resource('/file-upload', ImageController::class);
+  Route::prefix('role')->as('role')->group( function () {
+    Route::get('/' , [RoleController::class, 'index']);
+  });
+
+  Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');
 });
 
 Route::resource('blog', BlogController::class);

@@ -154,7 +154,7 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-       $blog = Blog::where('id', $id)->first()->delete();
+        $blog = Blog::where('id', $id)->first()->delete();
         return back()->with('sucess_message', 'Blog removed successfully');
     }
 
