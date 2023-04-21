@@ -30,11 +30,12 @@ class ProfileController extends Controller
 
         if ($request->hasFile('picture')) {
             $picture_path = ImageFile::saveImageRequest($request->picture, 'ProfilePictures', $request);
-            $data['picture'] = $picture_path;
         }
 
-        $data =  User::findOrFail($id)->firstOrfail();
+        $data =  User::findOrFail($id);
+        $data['picture'] = $picture_path;
         $user = [
+            'picture' => $picture_path,
             'phone_number' => $request->phone_number,
             'address' => $request->address,
             'state' => $request->state,

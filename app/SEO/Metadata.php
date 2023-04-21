@@ -22,7 +22,7 @@ class Metadata
         ->setAttribute('author', $blog->user->name)
         ->setAttribute("og_title", $blog->blog_title)
         ->setAttribute("og_description", $blog->meta_description)
-        ->setAttribute('og_url')
+        ->setAttribute('og_url', $blog->blog_url)
         ->setAttribute('og_image', $blog->cover_image)
         ->setAttribute('twitter_card', $blog->cover_image)
         ->setAttribute("twitter_image_alt", $blog->blog_title);
