@@ -61,7 +61,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{route('dashboard.user.account.settings')}}">
                             <i class="bx bx-cog me-2"></i>
                             <span class="align-middle">Settings</span>
                         </a>

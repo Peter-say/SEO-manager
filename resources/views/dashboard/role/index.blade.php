@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="">
-            <h4 class="fw-bold py-3 mb-1"><span class="text-muted fw-light">Settings/ </span> Users Role</h4>
+            <h4 class="fw-bold py-3 mb-1"><a href="{{route('dashboard.settings')}}" class="text-muted fw-light">Settings/ </a> Users Role</h4>
         </div>
         <div class="card">
             <h5 class="card-header">Responsive Table</h5>

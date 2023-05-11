@@ -17,9 +17,9 @@ class CreateBlogsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->contrained('users');
             $table->unsignedBigInteger('category_id')->contrained('categories');
-            $table->string('cover_image');
+            $table->string('cover_image')->nullable();
             $table->string('blog_title');
-            $table->string('blog_description');
+            $table->longText('blog_description');
             $table->string('blog_url')->nullable();
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();

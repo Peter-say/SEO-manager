@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\MetaDescription;
 use App\Http\Controllers\Web\CommentController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\SettingsController;
+use App\Http\Controllers\Dashboard\User\AccountSettings;
 use App\Http\Controllers\Dashboard\WebsiteDescription;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::get('/', function () {
   return view('welcome');
 });
 
+// web
 Route::prefix('web')->as('web.')->group(function () {
   Route::get('blog/index/', [App\Http\Controllers\Web\BlogController::class, 'index'])->name('blog.index');
   Route::get('blog/{blog:blog_url}', [App\Http\Controllers\Web\BlogController::class, 'details'])->name('blog');
@@ -41,17 +43,25 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('dashboard')->as('dashboard.')->group(function () {
   Route::get('/link-checker', [App\Http\Controllers\Dashboard\WebsiteInspection\LinkCrawlerController::class, 'linkChecker'])->name('link-checker');
-  Route::get('/', [App\Http\Controllers\Dashboard\WebsiteInspection\LinkCrawlerController::class, 'getURL'])->name('get-url');
+  Route::get('/crawl-url', [App\Http\Controllers\Dashboard\WebsiteInspection\LinkCrawlerController::class, 'getURL'])->name('crawl-url');
 
   Route::prefix('users')->as('users.')->group(function () {
     Route::get('/', [App\Http\Controllers\Dashboard\UsersController::class, 'index'])->name('index');
-    Route::get('users/role/{id}', [App\Http\Controllers\Dashboard\RoleController::class, 'role'])->name('role.update');
+    Route::get('users/role/{id}', [App\Http\Controllers\Dashboard\RoleController::class, 'update'])->name('role.update');
   });
 
   // Single User //
   Route::prefix('user')->as('user.')->group(function () {
     Route::get('/profile', [App\Http\Controllers\Dashboard\User\ProfileController::class, 'index'])->name('profile');
-    Route::put('/profile/update/{id}', [App\Http\Controllers\Dashboard\User\ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/{id}/profile/update', [App\Http\Controllers\Dashboard\User\ProfileController::class, 'update'])->name('profile.update');
+    Route::get('change-password', [App\Http\Controllers\Dashboard\User\UpdatePasswordController::class, 'changePassword'])->name('change-password');
+    Route::post('update-password', [App\Http\Controllers\Dashboard\User\UpdatePasswordController::class, 'updatePassword'])->name('update-password');
+
+
+    Route::get('/account-settings' , [AccountSettings::class, 'view'])->name('account.settings');
+    Route::get('/fetch-account' , [AccountSettings::class, 'getAccount'])->name('fetch-account');
+    Route::post('/delete-account/{id}' , [AccountSettings::class, 'destroy'])->name('delete-account');
+
   });
 
   Route::prefix('role')->as('role')->group(function () {
@@ -68,6 +78,7 @@ Route::prefix('dashboard')->as('dashboard.')->group(function () {
   // settings
   Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');
 });
+
 
 Route::resource('blog', BlogController::class);
 Route::resource('category', CategoryController::class);

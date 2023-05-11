@@ -7,6 +7,7 @@ use App\ImageFile;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\User;
+use App\Policies\BlogPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -29,13 +30,6 @@ class BlogController extends Controller
         ]);
     }
 
-    public function indexBlog($blogs)
-    {
-        dd($blogs);
-        $blogs = Blog::orderby('updated_at', 'desc')->paginate(6);
-        return $blogs->response()->json();
-    }
-
 
     /**
      * Show the form for creating a new resource.
@@ -44,6 +38,7 @@ class BlogController extends Controller
      */
     public function create(Blog $blog)
     {
+        $this->authorize(ability: 'create' , arguments:User::class);
         $categories = Category::all();
         return view('dashboard.blog.create-blog', compact('categories'));
     }
@@ -56,7 +51,6 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $data = $request->validate([
             "category_id" => "required|exists:categories,id",
             "cover_image" => "nullable|image",
@@ -72,7 +66,6 @@ class BlogController extends Controller
             $data['cover_image'] = $path;
         }
         $data['user_id'] = auth()->user()->id;
-        // dd($request->all(), $data);
         $blog = Blog::create($data);
         return redirect()->route('blog_url', $blog->id)->with("success_message", "Created Successfully");
     }
@@ -122,6 +115,8 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize(ability: 'update' , arguments:User::class);
+
         $data = $request->validate([
             "category_id" => "required|exists:categories,id",
             "cover_image" => "nullable|image",

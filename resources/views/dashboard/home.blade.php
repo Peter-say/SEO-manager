@@ -1,13 +1,12 @@
 @extends('dashboard.layouts.app', ['metaData' => $metaData])
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid mt-3">
         @foreach ($blogs as $blog)
-
-        <div>
-            @include('notifications.flash_messages')
-        </div>
-            <div class=" card mb-3 ">
+            <div>
+                @include('notifications.flash_messages')
+            </div>
+            <div class=" card mb-3  ">
                 <div class="card-body  row">
                     <div class="col-8">
                         <h3>{{ Str::of($blog->blog_title)->limit(350) }}</p>
@@ -18,13 +17,16 @@
                     </div>
                     <div class="col-12 d-flex justify-content-right ">
                         <a href="{{ route('blog.show', $blog->id) }}" class="btn btn-secondary btn-sm text-sm m-2">View</a>
-                        <a href="{{ route('blog.edit', $blog->id) }}" class="btn btn-primary btn-sm text-sm m-2">Edit</a>
-                        <form action="{{ route('blog.destroy', $blog->id) }}" method="post"
-                            onsubmit="return confirm('Are you sure you want to delete this blog?')">
-                            @csrf @method('DELETE')
-                            <button type="submit" onclick="$(this).parent().trigger('submit')"
-                                class="btn btn-danger btn-sm text-sm m-2">Remove</button>
-                        </form>
+                            @if (Auth::user()->id == $blog->user->id || Auth::user()->role == 'is_admin' || Auth::user()->role == 'is_moderator')
+                                <a href="{{ route('blog.edit', $blog->id) }}"
+                                    class="btn btn-primary btn-sm text-sm m-2">Edit</a>
+                                <form action="{{ route('blog.destroy', $blog->id) }}" method="post"
+                                    onsubmit="return confirm('Are you sure you want to delete this blog?')">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" onclick="$(this).parent().trigger('submit')"
+                                        class="btn btn-danger btn-sm text-sm m-2">Remove</button>
+                                </form>
+                            @endif
                         <a href="" class="fas fas-share m-2">Share</a>
                     </div>
                 </div>

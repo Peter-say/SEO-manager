@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\SEO\Metadata;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -27,6 +28,7 @@ class HomeController extends Controller
 
     public function index()
     {
+       
         $metaData = Metadata::DEFALT_META_DESCRIPTION;
         $blogs = Blog::get();
         return view('dashboard.home', compact('metaData' , 'blogs'));

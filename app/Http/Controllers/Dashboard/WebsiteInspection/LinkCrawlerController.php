@@ -22,7 +22,6 @@ class LinkCrawlerController extends Controller
 
     public function getUrl(Request $request, $url = null)
     {
-
         // $output = WebCrawler::crawler($request);
         $data = $request->validate(['web_url' => 'required|url']);
         $url = $request->input('web_url');
@@ -35,19 +34,15 @@ class LinkCrawlerController extends Controller
         // Set the HTTP method
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, $web_url);
+        // Return the response instead of printing it out
 
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-        if (self::getUrl($request, $url))
-            echo "Link Works";
-        else
-            echo "Broken Link";
-
+        // Send the request and store the result in $response
         $response = curl_exec($ch);
 
+        return $response;
         // Closing cURL
         curl_close($ch);
-
-        return back()->with('success_message', 'Crawled Successfully');
     }
 }

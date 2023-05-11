@@ -19,6 +19,7 @@ class SettingsController extends Controller
 
     public function settings()
     {
+
         $website_meta_description = Website_meta_description::first();
         // dd($website_meta_description->id);
         return  view('dashboard.settings', compact('website_meta_description'));

@@ -42,10 +42,13 @@ class Blog extends Model
         return $this->hasMany(BlogComment::class, 'blog_id');
     }
 
-    /**
-     * Here we will write the defult URL that will be 
-     * returned if no blog_url is specified
-     */
+    public function blogAuthor()
+    {
+        //
+    }
 
-    
+    public function getRouteKeyName()
+    {
+        return 'blog_url';
+    }
 }

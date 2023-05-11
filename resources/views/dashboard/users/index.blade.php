@@ -4,7 +4,10 @@
     <div class="container mt-5">
         <!-- Responsive Table -->
         <div class="card">
-            <h5 class="card-header">Responsive Table</h5>
+            <div class="d-flex justify-content-between">
+                <h5 class="">App Users</h5>
+                <a href="" class="btn btn-primary btn-sm m-0">Add User</a>
+            </div>
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
@@ -14,7 +17,7 @@
                             <th>Profile Picture</th>
                             <th>Email</th>
                             <th>Phone No.</th>
-                            <th>Adress</th>
+                            <th>Address</th>
                             <th>Status</th>
                             <th>Joined</th>
                             <th>Action</th>
@@ -26,10 +29,10 @@
                             <tr>
                                 <th scope="row">{{ $user->id }}</th>
                                 <td>{{ $user->name }}</td>
-                                <td>{{ $user->picture ?? 'N/A' }}</td>
+                                <td><img class="img-fluid w-50 h-50" src="{{ asset($user->picture ?? 'N/A') }}" alt="profile"></td>
                                 <td>{{ $user->email ?? 'N/A' }}</td>
                                 <td>{{ $user->phone_number ?? 'N/A' }}</td>
-                                <td>{{ $user->adress ?? 'N/A' }}</td>
+                                <td>{{ $user->address ?? 'N/A' }}</td>
                                 <td>{{ $user->status ?? 'N/A' }}</td>
                                 <td>{{ $user->created_at }}</td>
                                 <td>

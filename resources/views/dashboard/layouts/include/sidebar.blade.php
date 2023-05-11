@@ -73,68 +73,48 @@
                  <div data-i18n="Layouts">URL Inspection</div>
              </a>
          </li>
-         @can('view')
+         @if (Auth::user()->role == 'is_admin')
              <li class="menu-item">
                  <a href="{{ route('dashboard.users.index') }}" class="menu-link">
                      <i class="menu-icon tf-icons bx bx-layout"></i>
                      <div data-i18n="Layouts">App Users</div>
                  </a>
              </li>
-         @endcan
+         @endif
 
-         <li class="menu-header small text-uppercase">
-             <span class="menu-header-text">Blog</span>
-         </li>
-         <li class="menu-item">
-             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                 <div data-i18n="Account Settingss">Blog</div>
-             </a>
-             <ul class="menu-sub">
-                 <li class="menu-item">
-                     <a href="{{ route('blog.index') }}" class="menu-link">
-                         <div>Index</div>
-                     </a>
-                 </li>
-                 <li class="menu-item">
-                     <a href="{{ route('blog.create') }}" class="menu-link">
-                         <div>Create New</div>
-                     </a>
-                 </li>
+         @if (Auth::user()->role == 'is_admin' || Auth::user()->role == 'is_moderator' || Auth::user()->role == 'is_author')
+             <li class="menu-header small text-uppercase">
+                 <span class="menu-header-text">Blog</span>
+             </li>
+             <li class="menu-item">
+                 <a href="javascript:void(0);" class="menu-link menu-toggle">
+                     <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                     <div data-i18n="Account Settingss">Blog</div>
+                 </a>
+                 <ul class="menu-sub">
+                     <li class="menu-item">
+                         <a href="{{ route('blog.index') }}" class="menu-link">
+                             <div>Index</div>
+                         </a>
+                     </li>
+                     <li class="menu-item">
+                         <a href="{{ route('blog.create') }}" class="menu-link">
+                             <div>Create New</div>
+                         </a>
+                     </li>
 
 
-             </ul>
-         </li>
-         <li class="menu-item">
-             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                 <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                 <div data-i18n="Authentications">Authentications</div>
-             </a>
-             <ul class="menu-sub">
-                 <li class="menu-item">
-                     <a href="auth-login-basic.html" class="menu-link" target="_blank">
-                         <div data-i18n="Basic">  Login</div>
-                     </a>
-                 </li>
-                 <li class="menu-item">
-                     <a href="auth-register-basic.html" class="menu-link" target="_blank">
-                         <div data-i18n="Basic">Register</div>
-                     </a>
-                 </li>
-                 <li class="menu-item">
-                     <a href="auth-forgot-password-basic.html" class="menu-link" target="_blank">
-                         <div data-i18n="Basic">Forgot Password</div>
-                     </a>
-                 </li>
-             </ul>
-         </li>
-         <li class="menu-item">
-             <a href="{{route('dashboard.settings')}}" class="menu-link">
-                 <i class="bx bx-cog"></i>
-                 <div data-i18n="Error">Settings</div>
-             </a>
-         </li>
-
+                 </ul>
+             </li>
+         @endif
+         @if (Auth::user()->role == 'is_admin' || Auth::user()->role == 'is_moderator' || Auth::user()->role == 'is_author')
+             <li class="menu-item">
+                 <a href="{{ route('dashboard.settings') }}" class="menu-link">
+                     <i class="bx bx-cog"></i>
+                     <div data-i18n="Error">Settings</div>
+                 </a>
+             </li>
+         @endif
 
      </ul>
  </aside>

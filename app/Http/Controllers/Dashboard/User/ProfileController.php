@@ -27,7 +27,11 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
 
-
+        $user = Auth()->user();
+        $existing_picture_path = $user->picture;
+        if (!empty('picture')) {
+            $picture_path = $existing_picture_path;
+        }
         if ($request->hasFile('picture')) {
             $picture_path = ImageFile::saveImageRequest($request->picture, 'ProfilePictures', $request);
         }
@@ -44,7 +48,6 @@ class ProfileController extends Controller
             // dd($request->all()),
         ];
         $data->update($user);
-
         return back()->with('success_message', 'Profile Updated successfully');
     }
 }
