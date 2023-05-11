@@ -13,7 +13,7 @@
                         <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
                     </div>
                 </div>
-                <form action="{{ route('dashboard.user.delete-account', $id) }}" method="post">
+                <form action="{{ route('dashboard.user.delete-account', $id) }}" enctype="multipart/form-data" method="post">
                     @csrf @method('DELETE')
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" name="accountActivation" id="accountActivation" />

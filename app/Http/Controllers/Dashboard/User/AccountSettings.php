@@ -16,15 +16,14 @@ class AccountSettings extends Controller
 
     public function getAccount()
     {
-       $user = User::findOrfail();
-       $id = $user;
+        $user = Auth::user()->id;
+        $id = $user;
         return view('dashboard.user.delete-account', compact('id'));
     }
 
     public function destroy($id)
     {
-
         User::findOrFail($id)->delete();
-        return redirect()->route('blog.index', 'You have successfully deleted your account.If you would change you mind to join again, please register new account.');
+        return redirect()->route('register')->with('success_message', 'You have successfully deleted your account.If you would change you mind to join again, please register new account. Thanks');
     }
 }

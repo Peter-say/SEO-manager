@@ -60,7 +60,7 @@ Route::prefix('dashboard')->as('dashboard.')->group(function () {
 
     Route::get('/account-settings' , [AccountSettings::class, 'view'])->name('account.settings');
     Route::get('/fetch-account' , [AccountSettings::class, 'getAccount'])->name('fetch-account');
-    Route::post('/delete-account/{id}' , [AccountSettings::class, 'destroy'])->name('delete-account');
+    Route::delete('/delete-account/{id}' , [AccountSettings::class, 'destroy'])->name('delete-account');
 
   });
 
