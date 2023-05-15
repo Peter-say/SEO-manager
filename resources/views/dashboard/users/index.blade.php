@@ -29,7 +29,7 @@
                             <tr>
                                 <th scope="row">{{ $user->id }}</th>
                                 <td>{{ $user->name }}</td>
-                                <td><img class="img-fluid w-50 h-50" src="{{ asset($user->picture ?? 'N/A') }}" alt="profile"></td>
+                                <td><img class="img-fluid w-50 h-50" src="{{ asset($user->picture ?? "assets/img/avatars/avatar.jpeg" )}}" alt="profile"></td>
                                 <td>{{ $user->email ?? 'N/A' }}</td>
                                 <td>{{ $user->phone_number ?? 'N/A' }}</td>
                                 <td>{{ $user->address ?? 'N/A' }}</td>

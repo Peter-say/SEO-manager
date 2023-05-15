@@ -28,6 +28,7 @@ Route::get('/', function () {
   return view('welcome');
 });
 
+
 // web
 Route::prefix('web')->as('web.')->group(function () {
   Route::get('blog/index/', [App\Http\Controllers\Web\BlogController::class, 'index'])->name('blog.index');
@@ -38,8 +39,9 @@ Route::prefix('web')->as('web.')->group(function () {
 //dashboards routes
 
 Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
 
 Route::prefix('dashboard')->as('dashboard.')->group(function () {
   Route::get('/link-checker', [App\Http\Controllers\Dashboard\WebsiteInspection\LinkCrawlerController::class, 'linkChecker'])->name('link-checker');
