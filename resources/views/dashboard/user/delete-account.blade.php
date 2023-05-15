@@ -7,6 +7,7 @@
         <div class="card">
             <h5 class="card-header">Delete Account</h5>
             <div class="card-body">
+                @include('notifications.flash_messages')
                 <div class="mb-3 col-12 mb-0">
                     <div class="alert alert-warning">
                         <h6 class="alert-heading fw-bold mb-1">Are you sure you want to delete your account?</h6>
@@ -15,7 +16,11 @@
                 </div>
                 <form action="{{ route('dashboard.user.delete-account', $id) }}" enctype="multipart/form-data" method="post">
                     @csrf @method('DELETE')
-                    <div class="form-check mb-3">
+                    <div class="form-check mb-3 ">
+                       <div class="form-group">
+                        <label for="password" class="">Enter password to delete account:</label>
+                        <input type="password" name="password" class="form-control" id="">
+                       </div>
                         <input class="form-check-input" type="checkbox" name="accountActivation" id="accountActivation" />
                         <label class="form-check-label" for="accountActivation">I confirm my account deactivation</label>
                     </div>

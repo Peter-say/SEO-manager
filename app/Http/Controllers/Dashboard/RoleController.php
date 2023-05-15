@@ -20,7 +20,6 @@ class RoleController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $this->authorize(ability: 'update', arguments: User::class);
         User::findOrFail($id)->update([
             'role' => $request->role,

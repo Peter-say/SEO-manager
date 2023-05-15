@@ -3,6 +3,7 @@
 @section('content')
     <div class="container mt-5">
         <div>
+            @include('notifications.flash_messages')
             <!-- Basic Breadcrumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">

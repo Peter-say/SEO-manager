@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Dashboard\WebsiteInspection;
 
-use App\crawler;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 use App\Http\Controllers\Controller;
-use App\Website\WebCrawler;
-use DOMDocument;
 use Illuminate\Http\Request;
 
 
@@ -15,8 +14,18 @@ class LinkCrawlerController extends Controller
 
     public function linkChecker()
     {
-        //  $fetch_link = Crawler::crawl_page($depth = 5);
-        //  dd($fetch_link);
+        $process = new Process(["C:\Web Development\Laravel\SEO\SEO\app\PythonScripts\PythonTest.py"]);
+
+        $process->run();
+    
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+    
+        $data = $process->getOutput();
+    
+        dd($data);
+
         return view('dashboard.links.index');
     }
 

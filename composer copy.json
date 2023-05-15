@@ -14,7 +14,7 @@
         "laravel/ui": "^3.4",
         "spatie/browsershot": "^3.57",
         "spatie/crawler": "*",
-        "symfony/process": "^5.4"
+        "symfony/process": "^6.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
