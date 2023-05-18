@@ -12,8 +12,14 @@ class UsersController extends Controller
    {
       $this->authorize(ability: 'view' , arguments:User::class);
 
-      $users = User::all();
+      $users = User::paginate(10);
       return view('dashboard.users.index', compact('users'));
+   }
+
+   public function delete($id)
+   {
+      User::findOrFail($id)->delete();
+      return back()->with('success_message', 'User has been removed successfully');
    }
 
 }

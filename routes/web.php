@@ -49,6 +49,7 @@ Route::prefix('dashboard')->as('dashboard.')->group(function () {
 
   Route::prefix('users')->as('users.')->group(function () {
     Route::get('/', [App\Http\Controllers\Dashboard\UsersController::class, 'index'])->name('index');
+    Route::delete('delete/user{id}', [App\Http\Controllers\Dashboard\UsersController::class, 'delete'])->name('delete.user');
     Route::get('users/role/{id}', [App\Http\Controllers\Dashboard\RoleController::class, 'update'])->name('role.update');
   });
 

@@ -68,6 +68,10 @@
             padding: 8px, 0px, 0px , 8px;
         }
 
+        .admin{
+            background:blue;
+        }
+
         @media screen (min-with:700px) {
             .img-fluid {
                 width: 400px;
