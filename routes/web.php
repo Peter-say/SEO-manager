@@ -87,6 +87,7 @@ Route::resource('blog', BlogController::class);
 Route::resource('category', CategoryController::class);
 Route::resource('comments', CommentController::class);
 
+Route::get('blogs/manage', [App\Http\Controllers\BlogController::class, 'manageBlogs'])->name('blogs.manage');
 Route::get('category', [App\Http\Controllers\CategoryController::class, 'categoryBlogs'])->name('category.blogs');
 Route::get('blogs', [App\Http\Controllers\Web\BlogController::class, 'index'])->name('blogs');
 Route::get('search', [App\Http\Controllers\BlogController::class, 'search'])->name('blog.search');

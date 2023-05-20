@@ -29,8 +29,6 @@ class HomeController extends Controller
     public function index()
     {
        
-        $metaData = Metadata::DEFALT_META_DESCRIPTION;
-        $blogs = Blog::get();
         return view('dashboard.home', compact('metaData' , 'blogs'));
     }
 

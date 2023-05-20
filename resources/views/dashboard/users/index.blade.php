@@ -29,7 +29,7 @@
                         @foreach ($users as $user)
                             <tr>
                                 <th scope="row">{{ $user->id }}</th>
-                                <td class="{{ $user->role == 'is_admin' ? 'admin' : '' }}">{{ $user->name }}</td>
+                                <td class="{{ $user->role === 'is_admin' ? 'admin' : '' }}">{{ $user->name }}</td>
                                 <td><img class="img-fluid w-50 h-50"
                                         src="{{ asset($user->picture ?? 'assets/img/avatars/avatar.jpeg') }}"
                                         alt="profile"></td>

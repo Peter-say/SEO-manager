@@ -102,8 +102,11 @@
                              <div>Create New</div>
                          </a>
                      </li>
-
-
+                     <li class="menu-item">
+                        <a href="{{ route('blogs.manage') }}" class="menu-link">
+                            <div>Manage</div>
+                        </a>
+                    </li>
                  </ul>
              </li>
          @endif

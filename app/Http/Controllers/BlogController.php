@@ -8,6 +8,8 @@ use App\Models\Blog;
 use App\Models\Category;
 use App\Models\User;
 use App\Policies\BlogPolicy;
+use App\SEO\Metadata;
+use App\Services\BlogService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -51,23 +53,11 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            "category_id" => "required|exists:categories,id",
-            "cover_image" => "nullable|image",
-            "blog_description" => "required",
-            "blog_url" => "nullable|max:100",
-            "blog_title" => "required|max:100",
-            "meta_title" => "nullable",
-            "meta_description" => "nullable|max:150",
+       BlogService::validate($request->all());
+       $blog = BlogService::save($request);
 
-        ]);
-        if ($request->hasFile('cover_image')) {
-            $path = ImageFile::saveImageRequest($request->cover_image, 'ImageFolder', $request);
-            $data['cover_image'] = $path;
-        }
-        $data['user_id'] = auth()->user()->id;
-        $blog = Blog::create($data);
-        return redirect()->route('blog_url', $blog->id)->with("success_message", "Created Successfully");
+       return redirect()->route('blog_url', $blog->id)->with("success_message", "Created Successfully");
+
     }
 
     /**
@@ -116,29 +106,10 @@ class BlogController extends Controller
     public function update(Request $request, $id)
     {
         $this->authorize(ability: 'update' , arguments:User::class);
-
-        $data = $request->validate([
-            "category_id" => "required|exists:categories,id",
-            "cover_image" => "nullable|image",
-            "blog_description" => "required",
-            "blog_title" => "required|max:100",
-            "meta_title" => "nullable",
-            "meta_description" => "nullable|max:150",
-
-        ]);
-        $blog = Blog::where('id', $id)->first();
-        $existing_path = $blog->cover_image;
-
-        if (!empty('cover_image')) {
-            $image_path = $existing_path;
-        }
-        if ($request->hasFile('cover_image')) {
-            $image_path = ImageFile::saveImageRequest($request->cover_image, 'ImageFolder', $request);
-        }
-        $data['cover_image'] = $image_path;
-        $data['user_id'] = auth()->user()->id;
-        $blog->update($data);
+        BlogService::updateBlog($request->all());
+        $blog = BlogService::saveUpdate($request, $id);
         return redirect()->route('blog_url', $blog->id)->with("success_message", "Updated Successfully");
+        
     }
 
     /**
@@ -162,6 +133,12 @@ class BlogController extends Controller
         return view('dashboard.blog.index', compact('blogs'));
     }
 
+    public function manageBlogs()
+    {
+        $blogs = Blog::all();
+        return view('dashboard.blog.management', compact('blogs'));
+    }
+
 
 
 
@@ -177,7 +154,7 @@ class BlogController extends Controller
     public function reviewBlogURL($id)
     {
         $blog = Blog::where('id', $id)->first();
-        $default_blog_URL = Str::slug($blog->blog_title);
+        $default_blog_URL = old('blog_url') ?? Str::slug($blog->blog_title);
         return view('dashboard.blog.update-url', compact('default_blog_URL', 'blog'));
     }
 
