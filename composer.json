@@ -36,6 +36,12 @@
             "Tests\\": "tests/"
         }
     },
+
+    "files" : [
+        "app/Services/Application/WriterApplicationService.php",
+        "app/Services/BlogService.php"
+    ],
+
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

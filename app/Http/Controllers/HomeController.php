@@ -28,8 +28,7 @@ class HomeController extends Controller
 
     public function index()
     {
-       
-        return view('dashboard.home', compact('metaData' , 'blogs'));
+        return view('dashboard.home');
     }
 
     public function generalView($meta_description)

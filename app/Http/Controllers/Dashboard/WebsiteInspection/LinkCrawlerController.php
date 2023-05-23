@@ -14,23 +14,26 @@ class LinkCrawlerController extends Controller
 
     public function linkChecker()
     {
-        $process = new Process(["C:\Web Development\Laravel\SEO\SEO\app\PythonScripts\PythonTest.py"]);
-
-        $process->run();
     
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
-    
-        $data = $process->getOutput();
-    
-        dd($data);
-
         return view('dashboard.links.index');
     }
 
     public function getUrl(Request $request, $url = null)
     {
+
+
+        // $process = new Process(["Python" , "C:\Web Development\Laravel\SEO\SEO\app\PythonScripts\PythonTest.py"]);
+
+        // $process->run();
+    
+        // if (!$process->isSuccessful()) {
+        //     throw new ProcessFailedException($process);
+        // }
+        // $data = $process->getOutput();
+
+        // dd($data);
+
+       
         // $output = WebCrawler::crawler($request);
         $data = $request->validate(['web_url' => 'required|url']);
         $url = $request->input('web_url');

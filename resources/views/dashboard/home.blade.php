@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.app', ['metaData' => $metaData])
+@extends('dashboard.layouts.app')
 
 @section('content')
      <!-- Content -->

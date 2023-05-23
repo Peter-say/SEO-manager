@@ -15,7 +15,7 @@
             enctype="multipart/form-data" method="post">
             @csrf @method('PUT')
             <div class="form-group col-lg-8 col-xl-8 col-md-12 col-sm-12 pb-2 ">
-                <input type="text" class="form-control" value="{{ $default_blog_URL }}" name="blog_url" id="">
+                <input type="text" class="form-control" value="{{ old($blog->blog_url) ?? $default_blog_URL }}" name="blog_url" id="">
             </div>
             <div class="form-group col-lg-8 col-xl-8 col-md-12 col-sm-12 ">
                 <button type="submit" class="btn btn-primary">Save</button>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Web\CommentController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\User\AccountSettings;
+use App\Http\Controllers\Dashboard\User\Applications\WritersController;
 use App\Http\Controllers\Dashboard\WebsiteDescription;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,12 @@ Route::prefix('dashboard')->as('dashboard.')->group(function () {
     Route::get('/account-settings' , [AccountSettings::class, 'view'])->name('account.settings');
     Route::get('/fetch-account' , [AccountSettings::class, 'getAccount'])->name('fetch-account');
     Route::delete('/delete-account/{id}' , [AccountSettings::class, 'destroy'])->name('delete-account');
+
+    Route::prefix('application')->as('application.')->group(function () {
+       Route::get('apply/as/writer', [WritersController::class, 'create'])->name('apply.as.writer');
+       Route::post('writer/submit-request', [WritersController::class, 'sendRequest'])->name('writer.send-request');
+
+    });
 
   });
 

@@ -109,6 +109,10 @@
                     </li>
                  </ul>
              </li>
+             @else
+             <div class="container m-2">
+                <a href="{{route('dashboard.user.application.apply.as.writer')}}" class="btn btn-primary">Write For US</a>
+             </div>
          @endif
          @if (Auth::user()->role == 'is_admin' || Auth::user()->role == 'is_moderator' || Auth::user()->role == 'is_author')
              <li class="menu-item">

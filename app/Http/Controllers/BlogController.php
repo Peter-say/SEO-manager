@@ -40,7 +40,7 @@ class BlogController extends Controller
      */
     public function create(Blog $blog)
     {
-        $this->authorize(ability: 'create' , arguments:User::class);
+        // $this->authorize(ability: 'createBlog' , arguments:User::class);
         $categories = Category::all();
         return view('dashboard.blog.create-blog', compact('categories'));
     }
@@ -154,7 +154,7 @@ class BlogController extends Controller
     public function reviewBlogURL($id)
     {
         $blog = Blog::where('id', $id)->first();
-        $default_blog_URL = old('blog_url') ?? Str::slug($blog->blog_title);
+        $default_blog_URL = Str::slug($blog->blog_title);
         return view('dashboard.blog.update-url', compact('default_blog_URL', 'blog'));
     }
 

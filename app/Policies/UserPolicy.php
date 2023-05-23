@@ -39,9 +39,15 @@ class UserPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    // public function create(User $user)
+    // {
+    //     return $user->role == 'is_admin'  ;
+    // }
+
+    public function createBlog(User $user)
     {
-        return $user->role == 'is_admin'  ;
+        $user->role = 'is_admin' || $user->role == 'is_moderator' || $user->role == 'is_author';
+           
     }
 
     /**
