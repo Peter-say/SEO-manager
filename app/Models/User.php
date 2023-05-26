@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Application\Writer;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -52,5 +53,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function blogs()
     {
         return $this->hasMany(Blog::class);
+    }
+
+    
+    public function writer()
+    {
+        return $this->belongsTo(Writer::class);
     }
 }

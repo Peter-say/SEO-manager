@@ -13,6 +13,6 @@ class BlogNiche extends Model
 
     public function writer()
     {
-        return $this->hasMany(Writer::class, 'blog_niche', 'id');
+        return $this->belongsTo(Writer::class, 'blog_niches', 'id');
     }
 }

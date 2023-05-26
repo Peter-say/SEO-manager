@@ -103,17 +103,33 @@
                          </a>
                      </li>
                      <li class="menu-item">
-                        <a href="{{ route('blogs.manage') }}" class="menu-link">
-                            <div>Manage</div>
-                        </a>
-                    </li>
+                         <a href="{{ route('blogs.manage') }}" class="menu-link">
+                             <div>Manage</div>
+                         </a>
+                     </li>
                  </ul>
              </li>
-             @else
+
+         @else
              <div class="container m-2">
-                <a href="{{route('dashboard.user.application.apply.as.writer')}}" class="btn btn-primary">Write For US</a>
+                 <a href="{{ route('dashboard.user.application.apply.as.writer') }}" class="btn btn-primary">Write For
+                     US</a>
              </div>
          @endif
+
+         <li class="menu-item">
+             <a href="javascript:void(0);" class="menu-link menu-toggle">
+                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                 <div data-i18n="Account Settingss">Application</div>
+             </a>
+             <ul class="menu-sub">
+                 <li class="menu-item">
+                     <a href="{{ route('dashboard.application.writer.index') }}" class="menu-link">
+                         <div>Writers</div>
+                     </a>
+                 </li>
+             </ul>
+         </li>
          @if (Auth::user()->role == 'is_admin' || Auth::user()->role == 'is_moderator' || Auth::user()->role == 'is_author')
              <li class="menu-item">
                  <a href="{{ route('dashboard.settings') }}" class="menu-link">

@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Models\User;
 use App\Notifications\NewUserRegistration;
+use App\Notifications\NewWriterApplication;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
@@ -30,7 +31,8 @@ class SendNewUserNotification
     {
         $admins = User::where('role', 'is_admin');
 
-    Notification::send($admins, new NewUserRegistration($event->user));  
+    Notification::send($admins, new NewUserRegistration($event->user)); 
+   
 
     }
 }

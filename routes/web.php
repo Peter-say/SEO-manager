@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\User\AccountSettings;
 use App\Http\Controllers\Dashboard\User\Applications\WritersController;
 use App\Http\Controllers\Dashboard\WebsiteDescription;
+use App\Http\Controllers\Dashboard\WriterApplicationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -48,10 +49,19 @@ Route::prefix('dashboard')->as('dashboard.')->group(function () {
   Route::get('/link-checker', [App\Http\Controllers\Dashboard\WebsiteInspection\LinkCrawlerController::class, 'linkChecker'])->name('link-checker');
   Route::get('/crawl-url', [App\Http\Controllers\Dashboard\WebsiteInspection\LinkCrawlerController::class, 'getURL'])->name('crawl-url');
 
+  // Admin and sometimes Moderator previledge to operate
+
   Route::prefix('users')->as('users.')->group(function () {
     Route::get('/', [App\Http\Controllers\Dashboard\UsersController::class, 'index'])->name('index');
     Route::delete('delete/user{id}', [App\Http\Controllers\Dashboard\UsersController::class, 'delete'])->name('delete.user');
     Route::get('users/role/{id}', [App\Http\Controllers\Dashboard\RoleController::class, 'update'])->name('role.update');
+  });
+
+  Route::prefix('application')->as('application.')->group(function () {
+    Route::prefix('writer')->as('writer.')->group(function () {
+      Route::get('/index', [WriterApplicationController::class, 'index'])->name('index');
+      Route::get('/approve/role/{id}', [WriterApplicationController::class, 'approve'])->name('approve');
+    });
   });
 
   // Single User //
@@ -62,16 +72,15 @@ Route::prefix('dashboard')->as('dashboard.')->group(function () {
     Route::post('update-password', [App\Http\Controllers\Dashboard\User\UpdatePasswordController::class, 'updatePassword'])->name('update-password');
 
 
-    Route::get('/account-settings' , [AccountSettings::class, 'view'])->name('account.settings');
-    Route::get('/fetch-account' , [AccountSettings::class, 'getAccount'])->name('fetch-account');
-    Route::delete('/delete-account/{id}' , [AccountSettings::class, 'destroy'])->name('delete-account');
+    Route::get('/account-settings', [AccountSettings::class, 'view'])->name('account.settings');
+    Route::get('/fetch-account', [AccountSettings::class, 'getAccount'])->name('fetch-account');
+    Route::delete('/delete-account/{id}', [AccountSettings::class, 'destroy'])->name('delete-account');
 
     Route::prefix('application')->as('application.')->group(function () {
-       Route::get('apply/as/writer', [WritersController::class, 'create'])->name('apply.as.writer');
-       Route::post('writer/submit-request', [WritersController::class, 'sendRequest'])->name('writer.send-request');
-
+      Route::get('apply/as/writer', [WritersController::class, 'create'])->name('apply.as.writer');
+      Route::post('writer/submit-request', [WritersController::class, 'sendRequest'])->name('writer.send-request');
+      Route::get('writer/track-application', [WritersController::class, 'track'])->name('writer.track-application');
     });
-
   });
 
   Route::prefix('role')->as('role')->group(function () {
@@ -84,7 +93,7 @@ Route::prefix('dashboard')->as('dashboard.')->group(function () {
   Route::get('website-meta-description/{id}', [WebsiteDescription::class, 'edit'])->name('website-meta-description.edit');
   Route::put('website-meta-description/{id}', [WebsiteDescription::class, 'update'])->name('website-meta-description.update');
   Route::delete('website-meta-description/{id}', [WebsiteDescription::class, 'destroy'])->name('website-meta-description.destroy');
- 
+
   // settings
   Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');
 });
