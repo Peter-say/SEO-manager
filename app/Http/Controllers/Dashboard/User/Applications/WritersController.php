@@ -59,5 +59,9 @@ class WritersController extends Controller
     public function delete($id)
     {
         Writer::where('id', $id)->first()->delete();
+
+        return redirect()->route('home')->with('success_message', 'Your application has been deleted correctly. 
+        If you change your mind to apply again, plaese, 
+        make use of the Write For Us on your your dashboard to do so. Thanks');
     }
 }

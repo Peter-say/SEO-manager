@@ -16,7 +16,11 @@
             <div class="head d-flex justify-content-between p-3">
                 <h4>Manage Application</h4>
                 <div class="d-flex justify-content-around">
-                    
+                    <form action="{{ route('dashboard.user.application.delete-application', $application->id) }}"
+                        method="post">
+                        @csrf @method('DELETE')
+                        <button onclick="return confirm('Are you sure of this action?')" type="submit" class="btn btn-danger btn-sm ">Delete</button>
+                    </form>
                 </div>
             </div>
             <div class="card-body">
