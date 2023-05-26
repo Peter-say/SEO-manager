@@ -22,7 +22,6 @@
                         @foreach ($user as $user)
                             @php
                                 $rolebackground = '';
-                                $roleColor = 'text-danger';
                                 $role = $user->role;
                                 if ($role == 'is_admin') {
                                     $rolebackground = 'bg-success';
@@ -33,10 +32,14 @@
                                 if ($role == 'is_author') {
                                     $rolebackground = 'bg-secondary';
                                 }
-
+                                
+                                if (Auth::user()->role == 'is_admin') {
+                                    $admin = true;
+                                }
                                 
                             @endphp
-                            <tr class="{{ $rolebackground , $roleColor}}">
+
+                            <tr class="{{ $rolebackground }}" style="@disabled({{ $admin }})">
                                 <th>{{ $user->name }}</th>
                                 <th>{{ $user->email }}</th>
                                 <th>{{ $user->role }}</th>

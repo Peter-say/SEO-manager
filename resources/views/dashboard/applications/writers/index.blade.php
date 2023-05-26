@@ -24,7 +24,13 @@
                         @foreach ($applications as $application)
                             <tr>
                                 @php
-                                    $role = 'is_author';
+                                    $approveAuthor = 'is_author';
+                                    $removeAsAuthor = 'is_user';
+                                    //status
+                                    $ApprovedStatus = 'Approved';
+                                    $PendingStatus = 'Pending';
+                                    $RejectedStatus = 'Rejected';
+                                    
                                 @endphp
                                 <td>{{ $application->id }}</td>
                                 <td>{{ $application->user->email }}</td>
@@ -34,16 +40,28 @@
                                 <td><iframe src="{{ asset($application->resume) }}" class="img-fluid" frameborder="0"></iframe>
                                 </td>
                                 <td>
-                                    <div>
+                                    @if ($application->user->role == 'is_user')
+                                        <div>
+                                            <a onclick="return  confirm ('Are you sure of the action?')"
+                                                href="{{ route('dashboard.application.writer.approve', ['id' => $application->user->id, 'role' => $approveAuthor]) }}"
+                                                class="btn btn-success">Approve</a>
+                                            <a href="" class="btn btn-danger">Disapprove</a>
+                                        </div>
+                                    @elseif ($application->status == 'Pending')
+                                        <div>
+                                            <a onclick="return  confirm ('Are you sure of the action?')"
+                                                href="{{ route('dashboard.application.writer.update.status', ['id' => $application->id, 'status' => $ApprovedStatus]) }}"
+                                                class="btn btn-success">Mark As Approve</a>
+                                        </div>
+                                    @else
                                         <a onclick="return  confirm ('Are you sure of the action?')"
-                                            href="{{ route('dashboard.application.writer.approve', ['id' => $application->user->id, 'role' => $role]) }}"
-                                            class="btn btn-success">Approve</a>
-                                        <a href="" class="btn btn-danger">Disapprove</a>
-                                    </div>
+                                            href="{{ route('dashboard.application.writer.remove.author', ['id' => $application->user->id, 'role' => $removeAsAuthor]) }}"
+                                            class="btn btn-danger">Remove as Author</a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
-                    </tbody>
+                    </tbody>`
                 </table>
 
             </div>

@@ -20,6 +20,7 @@ class CreateWritersTable extends Migration
             $table->string('yrs_of_expirience');
             $table->string('salary');
             $table->string('resume');
+            $table->enum('status', ['Approved', 'Pending', 'Rejected'])->default('Pending');
             $table->timestamps();
         });
     }

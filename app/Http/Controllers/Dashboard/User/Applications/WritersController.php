@@ -55,4 +55,9 @@ class WritersController extends Controller
         // dd($application);
         return view('dashboard.user.application.writer.track-application', compact('application'));
     }
+
+    public function delete($id)
+    {
+        Writer::where('id', $id)->first()->delete();
+    }
 }

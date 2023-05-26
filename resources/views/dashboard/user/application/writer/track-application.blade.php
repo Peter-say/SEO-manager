@@ -1,13 +1,22 @@
 @extends('dashboard.layouts.app')
 
+@php
+    $statusColor = '';
+    if ($application->status == 'Pending') {
+        $statusColor = 'bg-warning';
+    }
+@endphp
+
 @section('content')
     <div class="container mt-5">
-        <div class="card">
+        <div class="d-flex justify-content-center">
+            <p>This Application is {{ $application->status }}</p>
+        </div>
+        <div class="card {{ $statusColor }}">
             <div class="head d-flex justify-content-between p-3">
                 <h4>Manage Application</h4>
                 <div class="d-flex justify-content-around">
-                    <a href="" class="btn btn-primary btn-sm pb-0">Edit</a>
-                    <a href="" class="btn btn-danger btn-sm pb-0">Delete</a>
+                    
                 </div>
             </div>
             <div class="card-body">
@@ -22,7 +31,7 @@
                         <b>Salary Expectation</b>: <span>{{ '$' . $application->salary }}</span>
                     </div>
                     <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 mt-5">
-                        <embed src="{{ asset($application->resume) }}"  style="width:100%; height: 80vh">
+                        <embed src="{{ asset($application->resume) }}" style="width:100%; height: 80vh">
                     </div>
 
                 </div>

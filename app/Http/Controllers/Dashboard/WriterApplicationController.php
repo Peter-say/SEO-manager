@@ -12,7 +12,6 @@ class WriterApplicationController extends Controller
     public function index()
     {
         $user = User::get();
-        // $role = User::where('role' , 'is_author');
         $applications = Writer::with('user')->get();
         return view('dashboard.applications.writers.index', compact('applications', 'user'));
     }
@@ -22,8 +21,30 @@ class WriterApplicationController extends Controller
         User::findOrFail($id)->update([
             'role' => $request->role,
         ]);
+        return back()->with('success_message', 'Please, click the Mark As Aprove button to compleate this application');
+    }
 
-        return back()->with('success_message', 'Application approved');
+    public function markStatusAsApprove(Request $request, $id)
+    {
+        Writer::findOrFail($id)->update([
+            'status' => $request->status,
+        ]);
+        return back()->with('success_message', 'Application approved.');
+    }
 
+    public function removeAuthorPreviledge(Request $request, $id)
+    {
+        User::findOrFail($id)->update([
+            'role' => $request->role,
+        ]);
+        return back()->with('success_message', 'User witdrew as an Author.');
+    }
+
+    public function markStatusAsPending(Request $request, $id)
+    {
+        Writer::findOrFail($id)->update([
+            'status' => $request->status,
+        ]);
+        return back()->with('success_message', 'Application has been set as pending.');
     }
 }

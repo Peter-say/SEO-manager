@@ -61,6 +61,10 @@ Route::prefix('dashboard')->as('dashboard.')->group(function () {
     Route::prefix('writer')->as('writer.')->group(function () {
       Route::get('/index', [WriterApplicationController::class, 'index'])->name('index');
       Route::get('/approve/role/{id}', [WriterApplicationController::class, 'approve'])->name('approve');
+      Route::get('/update/status/{id}', [WriterApplicationController::class, 'markStatusAsApprove'])->name('update.status');
+      Route::get('/remove/author/{id}', [WriterApplicationController::class, 'removeAuthorPreviledge'])->name('remove.author');
+      Route::get('/mark/as/pending/{id}', [WriterApplicationController::class, 'markStatusAsPending'])->name('mark.as.pending');
+
     });
   });
 
@@ -80,6 +84,8 @@ Route::prefix('dashboard')->as('dashboard.')->group(function () {
       Route::get('apply/as/writer', [WritersController::class, 'create'])->name('apply.as.writer');
       Route::post('writer/submit-request', [WritersController::class, 'sendRequest'])->name('writer.send-request');
       Route::get('writer/track-application', [WritersController::class, 'track'])->name('writer.track-application');
+      Route::delete('delete-application/{id}', [WritersController::class, 'delete'])->name('delete-application');
+
     });
   });
 
