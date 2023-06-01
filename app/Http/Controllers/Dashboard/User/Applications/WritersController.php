@@ -18,9 +18,13 @@ class WritersController extends Controller
     public function create(Writer $writer)
     {
         $user = Auth::user();
-        $niches = BlogNiche::all();
-        $writer = Writer::where('user_id', Auth::user()->id)->first();
-        return view('dashboard.user.application.writer.create-application', compact('niches', 'writer'));
+        if ($user->phone != null || $user->address != null) {
+            $niches = BlogNiche::all();
+            $writer = Writer::where('user_id', Auth::user()->id)->first();
+            return view('dashboard.user.application.writer.create-application', compact('niches', 'writer'));
+        } else {
+            return redirect()->route('dashboard.user.profile')->with('error_message', 'Please, complete your profile infomation to apply');
+        }
     }
 
     public function sendRequest(Request $request, User $user)
@@ -62,6 +66,6 @@ class WritersController extends Controller
 
         return redirect()->route('home')->with('success_message', 'Your application has been deleted correctly. 
         If you change your mind to apply again, plaese, 
-        make use of the Write For Us on your your dashboard to do so. Thanks');
+        make use of the Write For Us on your dashboard to do so. Thanks');
     }
 }

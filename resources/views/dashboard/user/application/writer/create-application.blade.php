@@ -41,7 +41,7 @@
                     <div class=" form-group col-xl-6 col-lg-6 col-md-12 col-sm-12 mt-2">
                         <label for="" class="">Salary Expectection</label>
                         <input type="number" class=" form-control  @error('salary') is-invalid @enderror" name="salary">
-                        <small>Amount is should be in Dollars($). Please don't include the sign</small>
+                        <small>Amount should be in Dollars($). Please don't include the sign</small>
 
                         @error('salary')
                             <span class="invalid-feedback" role="alert">

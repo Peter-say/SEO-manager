@@ -35,8 +35,8 @@
                                 <td>{{ $application->id }}</td>
                                 <td>{{ $application->user->email }}</td>
                                 <td>{{ $application->niche->name }}</td>
-                                <td>{{ $application->yrs_of_expirience }}</td>
-                                <td>{{ $application->salary }}</td>
+                                <td>{{ $application->yrs_of_expirience . 'years' }}</td>
+                                <td>{{ '$' . $application->salary }}</td>
                                 <td><iframe src="{{ asset($application->resume) }}" class="img-fluid" frameborder="0"></iframe>
                                 </td>
                                 <td>
@@ -48,16 +48,19 @@
                                             <a href="" class="btn btn-danger">Disapprove</a>
                                         </div>
                                     @elseif ($application->status == 'Pending')
-                                        <div>
-                                            <a onclick="return  confirm ('Are you sure of the action?')"
-                                                href="{{ route('dashboard.application.writer.update.status', ['id' => $application->id, 'status' => $ApprovedStatus]) }}"
-                                                class="btn btn-success">Mark As Approve</a>
-                                        </div>
-                                    @else
+                                        <a onclick="return  confirm ('Are you sure of the action?')"
+                                            href="{{ route('dashboard.application.writer.update.status', ['id' => $application->id, 'status' => $ApprovedStatus]) }}"
+                                            class="btn btn-success">Mark As Approve</a>
+                                    @elseif($application->user->role == 'is_author')
                                         <a onclick="return  confirm ('Are you sure of the action?')"
                                             href="{{ route('dashboard.application.writer.remove.author', ['id' => $application->user->id, 'role' => $removeAsAuthor]) }}"
                                             class="btn btn-danger">Remove as Author</a>
+                                    @else
+                                        <a onclick="return  confirm ('Are you sure of the action?')"
+                                            href="{{ route('dashboard.application.writer.mark.as.pending', ['id' => $application->id, 'status' => $PendingStatus]) }}"
+                                            class="btn btn-warning">Mark as pending</a>
                                     @endif
+
                                 </td>
                             </tr>
                         @endforeach

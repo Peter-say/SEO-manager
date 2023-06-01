@@ -45,6 +45,6 @@ class WriterApplicationController extends Controller
         Writer::findOrFail($id)->update([
             'status' => $request->status,
         ]);
-        return back()->with('success_message', 'Application has been set as pending.');
+        return back()->with('success_message', 'Application has been set to pending.');
     }
 }
