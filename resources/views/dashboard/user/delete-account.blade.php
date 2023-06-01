@@ -5,7 +5,11 @@
         <!-- Content -->
 
         <div class="card">
-            <h5 class="card-header">Delete Account</h5>
+            <div class="card-header d-flex justify-content-between">
+                <h5>Delete Account</h5>
+            <a href="{{route('dashboard.user.account.settings')}}" class="btn btn-primary">Go back to settings</a>
+            </div>
+
             <div class="card-body">
                 @include('notifications.flash_messages')
                 <div class="mb-3 col-12 mb-0">

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-5">
         <!-- Responsive Table -->
-        <div class="card">
+        <div class="card p-3">
             @include('notifications.flash_messages')
             <div class="d-flex justify-content-between">
                 <h5 class="">App Users</h5>
@@ -27,7 +27,23 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-                            <tr>
+                        @php
+
+                       
+                        $rolebackground = '';
+                        if ($user->role == 'is_admin') {
+                            $rolebackground = 'bg-success';
+                            $roleColor = 'text-white';
+                        }
+                        if ($user->role == 'is_moderator') {
+                            $rolebackground = 'bg-primary';
+                            $roleColor = 'text-dark';
+                        }
+                       
+                        
+                    @endphp
+
+                            <tr class="{{$rolebackground}}">
                                 <th scope="row">{{ $user->id }}</th>
                                 <td class="{{ $user->role === 'is_admin' ? 'admin' : '' }}">{{ $user->name }}</td>
                                 <td><img class="img-fluid w-50 h-50"

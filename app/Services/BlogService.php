@@ -79,6 +79,8 @@ class BlogService
         $data['category_id'] = $request->input('category_id');
         $data['blog_description'] = $request->input('blog_description');
         $data['blog_title'] = $request->input('blog_title');
+        $data['meta_description'] = $request->input('meta_description');
+        $data['meta_title'] = $request->input('meta_title');
         $data['cover_image'] = $image_path;
         $data['user_id'] = auth()->user()->id;
         $blog->update($data);

@@ -68,7 +68,7 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-
+        Blog::first()->view_counts->increment;
         $blog = Blog::find($id);
         $comments = $blog->comments;
         $single_category = $blog->category;
@@ -105,7 +105,6 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize(ability: 'update' , arguments:User::class);
         BlogService::updateBlog($request->all());
         $blog = BlogService::saveUpdate($request, $id);
         return redirect()->route('blog_url', $blog->id)->with("success_message", "Updated Successfully");
@@ -120,6 +119,7 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize(ability: 'update' , arguments:User::class);
         $blog = Blog::where('id', $id)->first()->delete();
         return back()->with('sucess_message', 'Blog removed successfully');
     }

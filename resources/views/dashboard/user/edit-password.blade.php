@@ -1,10 +1,11 @@
 @extends('dashboard.layouts.app')
 
 @section('content')
-    <div class="container col-lg-8 col-xl-8 col-md-12 col-sm-12">
+    <div class="container mt-5 col-lg-8 col-xl-8 col-md-12 col-sm-12">
         <div class="card m-2 p-2">
-            <div class="card-header text-center">
+            <div class="card-header d-flex justify-content-between">
                 <h4>Change Password</h4>
+                <a href="{{route('dashboard.user.account.settings')}}" class="btn btn-primary">Go back to settings</a>
             </div>
             @include('notifications.flash_messages')
             <div>
