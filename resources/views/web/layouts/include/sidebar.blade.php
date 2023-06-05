@@ -1,13 +1,12 @@
  <!-- Menu -->
 
  <style>
-    .choose-topic{
-        border: 2px solid darkblue;
-        border-radius: 10px;
-        padding: 5px;
-        color: 
-    }
-</style>
+     .choose-topic {
+         border: 2px solid darkblue;
+         border-radius: 10px;
+         color:
+     }
+ </style>
 
  <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
      <div class="app-brand demo">
@@ -67,20 +66,15 @@
      <div class="menu-inner-shadow"></div>
 
      <ul class="menu-inner py-1">
-        <div class="m-2 justify-content-center choose-topic"><h5>Choose A Topic To Read</h5></div>
-         <div class="row justify-content-center">
-             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 m-2">
-                 <a href="" class="btn btn-secondary">Laravel</a>
-             </div>
-             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 m-2">
-                 <a href="" class="btn btn-secondary">Digital Marketing</a>
-             </div>
-             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 m-2">
-                 <a href="" class="btn btn-secondary">PHP</a>
-             </div>
-             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 m-2">
-                 <a href="" class="btn btn-secondary">HTML</a>
-             </div>
+         <div class="m-2 d-flex justify-content-center m-3 p-2 choose-topic">
+             <h5>Choose A Topic To Read</h5>
+         </div>
+         <div class="row d-flex justify-content-center">
+             @foreach ($categories as $category)
+                 <div class=" d-flex justify-content-center col-xl-6 col-lg-6 col-md-6 col-sm-6 m-2">
+                     <a href="" class="btn btn-secondary">{{ $category->label }}</a>
+                 </div>
+             @endforeach
          </div>
      </ul>
  </aside>

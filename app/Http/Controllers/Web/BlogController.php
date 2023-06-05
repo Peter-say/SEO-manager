@@ -13,10 +13,12 @@ class BlogController extends Controller
 {
     public function index(Blog $post)
     {
+        $categories = Category::all();
         $blogs = Blog::orderby('updated_at', 'desc')->paginate(6);
         // $metaData = Metadata::onPageMetadata($post);
         return view('web.blogs.index', [
             'blogs' => $blogs,
+            'categories' => $categories,
             // "metaData" => $metaData ,
         ]);
     }
@@ -38,6 +40,7 @@ class BlogController extends Controller
 
     public function details($blog, Category $category)
     {
+        $categories = Category::all();
         $blog = Blog::where('id', $blog)->first();
         $comments = $blog->comments;
         $single_category = $blog->category;
@@ -51,6 +54,7 @@ class BlogController extends Controller
             'single_category' => $single_category,
             'comments' => $comments,
             "relatedPosts" =>  $relatedPosts,
+            'categories' => $categories,
         ]);
     }
 

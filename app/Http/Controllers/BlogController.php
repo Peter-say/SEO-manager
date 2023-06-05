@@ -66,13 +66,14 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Category $category)
     {
-        Blog::first()->view_counts->increment;
+     
         $blog = Blog::find($id);
         $comments = $blog->comments;
         $single_category = $blog->category;
-        $relatedPosts =  Blog::where($id)->has('category');
+        $relatedPosts = $blog::where('category_id', $category->id)->get();
+        // dd($relatedPosts);
         // $metaData = Metadata::onPageMetadata($post);
 
         return view('dashboard.blog.blog-details', [

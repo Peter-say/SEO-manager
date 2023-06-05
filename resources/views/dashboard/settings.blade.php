@@ -18,6 +18,32 @@
         @endif
 
         @if (Auth::user()->role == 'is_admin' || (Auth::user()->role == 'is_moderator' || Auth::user()->role == 'is_author'))
+
+            <div class="card mt-2 mb-2">
+                <div class="card-header">
+                    <h5>Website Title</h5>
+                </div>
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+                        @if (empty($website_title->meta_title))
+                            Change or update website title
+                            <span><a href="{{ route('dashboard.website-title.create') }}" class="btn btn-primary">Proceed</a></span>
+                        @else
+                            <div class="d-flex justify-content-between col-lg-8 col-xl-8 col-md-12 col-sm-12">
+                                <span>
+                                    <h2>{{ $website_title->meta_title ?? config('app.name') }}</h2>
+                                </span>
+
+                                <span><a href="{{ route('dashboard.website-title.edit', $website_title->id) }}"
+                                        class="btn btn-primary ">Edit</a></span>
+
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
             <div class="card mt-2">
                 <div class="card-header">
                     <h5>Website Meta Description</h5>
@@ -57,5 +83,6 @@
                 </div>
             </div>
         @endif
+
     </div>
 @endsection

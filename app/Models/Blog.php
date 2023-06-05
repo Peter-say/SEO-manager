@@ -42,9 +42,9 @@ class Blog extends Model
         return $this->hasMany(BlogComment::class, 'blog_id');
     }
 
-    public function blogAuthor()
+    public static function scopeRelatedCategory($query, $category_id)
     {
-        //
+        return $query->where("category_id", $category_id);
     }
 
     public function getRouteKeyName()

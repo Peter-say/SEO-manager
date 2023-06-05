@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeEmail;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Notifications\NewUserRegistration;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 
@@ -67,13 +69,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $admins = User::where('role', 'is_admin')->get();
+       
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            Notification::send($admins, new NewUserRegistration($data['name'])),
         ]);
+        $user = User::first();
+        Mail::to($user->email)->send(new WelcomeEmail());
+
 
         
 

@@ -41,7 +41,7 @@
                 <h3>Related Articles</h3>
                 @foreach ($relatedPosts as $related)
                     <div class="content-box">
-                        <h5>{{ $related->blog->blog_title }}</h5>
+                        <h5>{{ $related->blog_title }}</h5>
                         <p></p>
                     </div>
                 @endforeach

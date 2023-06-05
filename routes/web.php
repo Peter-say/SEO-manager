@@ -103,6 +103,12 @@ Route::prefix('dashboard')->as('dashboard.')->group(function () {
   Route::put('website-meta-description/{id}', [WebsiteDescription::class, 'update'])->name('website-meta-description.update');
   Route::delete('website-meta-description/{id}', [WebsiteDescription::class, 'destroy'])->name('website-meta-description.destroy');
 
+  Route::get('/', [WebsiteDescription::class, 'createMetaTitle'])->name('website-title.create');
+  Route::post('website-title/store', [WebsiteDescription::class, 'storeMetaTitle'])->name('website-title.store');
+  Route::get('website-title/{id}/edit', [WebsiteDescription::class, 'EditMetaTitle'])->name('website-title.edit');
+  Route::put('website-title/{id}/update', [WebsiteDescription::class, 'updateMetaTitle'])->name('website-title.update');
+
+
   // settings
   Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');
 });
