@@ -54,9 +54,10 @@ class CommentController extends Controller
         $comment->email = $request->email;
         if (Auth::user()) {
             $comment['user_id'] = auth()->user()->id;
-        } else {
-            $comment['user_id'] = null;
-        }
+        } 
+        if (Auth::user()) {
+            $comment['name'] = auth()->user()->name;
+        } 
         $comment->website = $request->website;
         $comment->body = $request->body;
         $blog = Blog::find($request->input('blog_id'));

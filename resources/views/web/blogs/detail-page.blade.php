@@ -10,7 +10,7 @@
                         <a href="{{ route('web.blog.index') }}">Home</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="#">{{$single_category->label}}</a>
+                        <a href="{{route('web.category.blogs', $single_category->label)}}">{{ $single_category->label }}</a>
                     </li>
                     <li class="breadcrumb-item active">{{ $blog->blog_title }}</li>
                 </ol>
@@ -35,12 +35,19 @@
             </div>
 
             <div class="card col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                <div class="card-hearder"><h3>Related Articles</h3></div>
+                <div class="card-hearder">
+                    <h3>Related Articles</h3>
+                </div>
                 @foreach ($relatedPosts as $related)
                     <div class="">
                         <h5>{{ $related->blog_title }}</h5>
-                        <p></p>
+
+                        <img class="img-fluid w-100"
+                            src="{{ asset($related->cover_image ?? 'assets/img/elements/5.jpg') }}"
+                            alt="{{ $related->image_tag }}">
+                            <a href="{{ route('web.blog', $related->id) }}" class="btn btn-primary w-100">Read This</a>
                     </div>
+                    <hr style="">
                 @endforeach
             </div>
 
@@ -83,16 +90,16 @@
                             <button type="submit" class="form-control btn btn-primary">Submit</button>
                         </div>
                     @else
-                    <div>
-                        <label for="email">Name *</label>
-                        <input type="text" class="form-control @error('username') is-invalid @enderror" name="username"
-                            placeholder="Enter your Name">
-                        @error('username')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+                        <div>
+                            <label for="email">Name *</label>
+                            <input type="text" class="form-control @error('username') is-invalid @enderror"
+                                name="username" placeholder="Enter your Name">
+                            @error('username')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
                         <div>
                             <label for="email">Email Adresss *</label>

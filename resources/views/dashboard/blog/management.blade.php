@@ -8,11 +8,11 @@
         </div>
         <div class=" card mb-3  ">
             <div class="card-body  row">
-                <div class="col-xl-8 col-lg-8 col-md-4 col-sm-4">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-4">
                     <h3>{{ Str::of($blog->blog_title)->limit(350) }}</p>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                    <img class="img-fluid dashboard-blog-list"
+                    <img class="img-fluid dashboard-blog-list w-100"
                         src="{{ asset($blog->cover_image ?? 'assets/img/elements/5.jpg') }}" alt="">
                 </div>
                 <div class="col-12 d-flex justify-content-right ">

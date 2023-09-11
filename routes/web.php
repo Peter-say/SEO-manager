@@ -36,6 +36,7 @@ Route::get('/', function () {
 Route::prefix('web')->as('web.')->group(function () {
   Route::get('blog/index/', [App\Http\Controllers\Web\BlogController::class, 'index'])->name('blog.index');
   Route::get('blog/{blog:blog_url}', [App\Http\Controllers\Web\BlogController::class, 'details'])->name('blog');
+  Route::get('catetegory/{id}/blogs', [App\Http\Controllers\Web\BlogController::class, 'categoryBlogs'])->name('category.blogs');
 });
 
 
@@ -49,6 +50,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->midd
 Route::prefix('dashboard')->as('dashboard.')->group(function () {
   Route::get('/link-checker', [App\Http\Controllers\Dashboard\WebsiteInspection\LinkCrawlerController::class, 'linkChecker'])->name('link-checker');
   Route::get('/crawl-url', [App\Http\Controllers\Dashboard\WebsiteInspection\LinkCrawlerController::class, 'getURL'])->name('crawl-url');
+  Route::get('run-python-script', [App\Http\Controllers\Dashboard\WebsiteInspection\LinkCrawlerController::class, 'runPythonScript']);
 
   // Admin and sometimes Moderator previledge to operate
 

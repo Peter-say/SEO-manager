@@ -19,19 +19,30 @@ class LinkCrawlerController extends Controller
     }
 
     public function getUrl(Request $request, $url = null)
-    {
-
-
-        $data = shell_exec("Python" . app_path() . "C:\Web Development\Laravel\SEO\SEO\app\PythonScripts\PythonTest.py");
-
-        // $process->run();
+{
+    $output = [];
+    $returnCode = 0;
     
-        // if (!$process->isSuccessful()) {
-        //     throw new ProcessFailedException($process);
-        // }
-        // $data = $process->getOutput();
+    // Adjust the command based on the Python executable name and script path
+    $command = 'python3 ' . base_path('app/PythonScripts/PythonTest.py');
+    
+    exec($command . ' 2>&1', $output, $returnCode);
 
-        dd($data);
+    error_log(print_r($output, true));
+
+    if ($returnCode === 0) {
+        // Python script executed successfully
+        return response()->json([
+            'output' => $output,
+        ]);
+    } else {
+        // Error occurred while executing Python script
+        return response()->json([
+            'error' => 'An error occurred while executing the Python script.',
+        ], 500);
+    }
+
+
 
        
         // $output = WebCrawler::crawler($request);
@@ -57,4 +68,23 @@ class LinkCrawlerController extends Controller
         // Closing cURL
         // curl_close($ch);
     }
+    public function runPythonScript()
+    {
+        $process = new Process(['python', 'PythonScripts\PythonTest.py']);
+        
+        try {
+            $process->mustRun();
+            
+            $output = $process->getOutput();
+            
+            return response()->json([
+                'output' => $output,
+            ]);
+        } catch (ProcessFailedException $exception) {
+            return response()->json([
+                'error' => 'An error occurred while executing the Python script.',
+            ], 500);
+        }
+    }
+
 }

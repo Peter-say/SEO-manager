@@ -68,21 +68,23 @@ class BlogController extends Controller
      */
     public function show($id, Category $category)
     {
-     
         $blog = Blog::find($id);
         $comments = $blog->comments;
         $single_category = $blog->category;
-        $relatedPosts = $blog::where('category_id', $category->id)->get();
-        // dd($relatedPosts);
-        // $metaData = Metadata::onPageMetadata($post);
-
+    
+        // Retrieve related posts based on the category of the current blog post
+        $relatedPosts = Blog::where('category_id', $single_category->id)
+                            ->where('id', '!=', $id) // Exclude the current blog post
+                            ->get();
+    
         return view('dashboard.blog.blog-details', [
             'blog' => $blog,
             'single_category' => $single_category,
             'comments' => $comments,
-            "relatedPosts" =>  $relatedPosts,
+            'relatedPosts' => $relatedPosts,
         ]);
     }
+      
 
     /**
      * Show the form for editing the specified resource.

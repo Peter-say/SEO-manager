@@ -69,13 +69,13 @@
          <div class="m-2 d-flex justify-content-center m-3 p-2 choose-topic">
              <h5>Choose A Topic To Read</h5>
          </div>
-         <div class="row d-flex justify-content-center">
+         {{-- <div class="row d-flex justify-content-center">
              @foreach ($categories as $category)
                  <div class=" d-flex justify-content-center col-xl-6 col-lg-6 col-md-6 col-sm-6 m-2">
                      <a href="" class="btn btn-secondary">{{ $category->label }}</a>
                  </div>
              @endforeach
-         </div>
+         </div> --}}
      </ul>
  </aside>
  <!-- / Menu -->

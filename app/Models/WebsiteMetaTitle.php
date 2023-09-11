@@ -10,4 +10,7 @@ class WebsiteMetaTitle extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    const APP_NAME = 'Lolol';
+
 }

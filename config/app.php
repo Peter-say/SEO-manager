@@ -15,10 +15,12 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('OPOPO', Metadata::appMetaTitle()),
+
+    // Metadata::META_TITLE
     
 
-    'meta_description' =>  Metadata::DEFALT_META_DESCRIPTION,
+    // 'meta_description' =>  Metadata::DEFALT_META_DESCRIPTION,
 
     /*
     |--------------------------------------------------------------------------

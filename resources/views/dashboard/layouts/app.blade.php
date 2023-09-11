@@ -14,8 +14,8 @@
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
-    <meta name="description" content="{{Metadata::DEFALT_META_DESCRIPTION}}" />
-    <meta property="og:site_name" content="{{Metadata::DEFALT_META_TITLE}}">
+    <meta name="description" content="" />
+    <meta property="og:site_name" content="{{config('app.name')}}">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ $dashboards_assets }}/img/favicon/favicon.ico" />
