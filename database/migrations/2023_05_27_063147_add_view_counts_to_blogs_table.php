@@ -14,7 +14,7 @@ class AddViewCountsToBlogsTable extends Migration
     public function up()
     {
         Schema::table('blogs', function (Blueprint $table) {
-            $table->integer('view_counts');
+            $table->integer('view_counts')->default('0');
         });
     }
 

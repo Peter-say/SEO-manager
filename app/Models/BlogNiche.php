@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Crawler extends Model
+class BlogNiche extends Model
 {
-
-    protected $guarded = [];
     use HasFactory;
 }

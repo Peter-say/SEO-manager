@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('OPOPO', Metadata::appMetaTitle()),
+    'name' => env('APP_NAME', Metadata::appMetaTitle()),
 
     // Metadata::META_TITLE
     

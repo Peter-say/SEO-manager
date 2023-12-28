@@ -28,23 +28,33 @@
                         @endif
                     </div>
                     <div class="blog-timestamp">
-                        <span class="mr-5"><strong>Written On:</strong>{{ $blog->created_at->diffForHumans() }}</span>
-                        <span><strong>Last Updated:</strong>{{ $blog->updated_at->diffForHumans() }}</span>
+                        <span class="mr-5"><strong>Written On:</strong>{{ $blog->created_at->format('M d, Y') }}</span>
+                        <span><strong>Last Updated:</strong>{{ $blog->updated_at->format('M d, Y') }}</span>
                     </div>
                 </div>
-                <img class=" blog-detail-image" src="{{ asset($blog->cover_image ?? 'assets/img/elements/5.jpg') }}"
+                <img class=" blog-detail-image"
+                    src="{{ asset($blog->cover_image ?? 'assets/img/elements/5.jpg') }}"
                     alt="{{ $blog->image_tag }}">
                 <p id="article-text">{{ $blog->blog_description }}</p>
             </div>
 
-            <div class="card-body aside col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                <h3>Related Articles</h3>
-                @foreach ($relatedPosts as $related)
-                    <div class="content-box">
-                        <h5>{{ $related->blog_title }}</h5>
-                        <p></p>
-                    </div>
-                @endforeach
+            <div class="card col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                <div class="card-hearder">
+                    <h3>Related Articles</h3>
+                </div>
+                @if ($relatedPosts)
+                    @foreach ($relatedPosts as $related)
+                        <div class="">
+                            <h5>{{ $related->blog_title }}</h5>
+
+                            <img class="img-fluid w-100"
+                                src="{{ asset('ImageFolder/' . $related->cover_image ?? 'assets/img/elements/5.jpg') }}"
+                                alt="{{ $related->image_tag }}">
+                            <a href="{{ route('web.blog', $related->id) }}" class="btn btn-primary w-100">Read This</a>
+                        </div>
+                        <hr style="">
+                    @endforeach
+                @endif
             </div>
 
             @if ($comments->count())
@@ -86,7 +96,7 @@
                     <div>
                         <label for="username">Name *</label>
                         <input type="text" class="form-control @error('username') is-invalid @enderror" name="username"
-                           value="{{Auth::user()->name}}" placeholder="Enter your username">
+                            value="{{ Auth::user()->name }}" placeholder="Enter your username">
                         @error('username')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -96,19 +106,19 @@
                     <div>
                         <label for="email">Email Adresss *</label>
                         <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                          value="{{Auth::user()->email}}" placeholder="Enter your email">
+                            value="{{ Auth::user()->email }}" placeholder="Enter your email">
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-                    
+
                     <div>
                         <label for="website">Website</label>
-                       
-                        <input type="website" class="form-control" name="website"  placeholder="Enter Website">
- 
+
+                        <input type="website" class="form-control" name="website" placeholder="Enter Website">
+
                     </div>
                     <div>
                         <label for="comment">Comment</label>

@@ -56,7 +56,7 @@ class CommentController extends Controller
             $comment['user_id'] = auth()->user()->id;
         } 
         if (Auth::user()) {
-            $comment['name'] = auth()->user()->name;
+            $comment['username'] = auth()->user()->name;
         } 
         $comment->website = $request->website;
         $comment->body = $request->body;

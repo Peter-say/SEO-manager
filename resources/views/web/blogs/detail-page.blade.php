@@ -10,7 +10,8 @@
                         <a href="{{ route('web.blog.index') }}">Home</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{route('web.category.blogs', $single_category->label)}}">{{ $single_category->label }}</a>
+                        <a
+                            href="{{ route('web.category.blogs', $single_category->label) }}">{{ $single_category->label }}</a>
                     </li>
                     <li class="breadcrumb-item active">{{ $blog->blog_title }}</li>
                 </ol>
@@ -25,11 +26,11 @@
                         <span><b>Written by</b>: {{ $blog->user->name }}</span>
                     </div>
                     <div class="blog-timestamp">
-                        <span class="mr-5"><strong>Written On:</strong>{{ $blog->created_at->diffForHumans() }}</span>
-                        <span><strong>Last Updated:</strong>{{ $blog->updated_at->diffForHumans() }}</span>
+                        <span class="mr-5"><strong>Written On:</strong>{{ $blog->created_at->format('M d, Y') }}</span>
+                        <span><strong>Last Updated:</strong>{{ $blog->updated_at->format('M d, Y') }}</span>
                     </div>
                 </div>
-                <img class=" blog-detail-image" src="{{ asset($blog->cover_image ?? 'assets/img/elements/5.jpg') }}"
+                <img class=" blog-detail-image" src="{{ asset('ImageFolder/' . $blog->cover_image ?? 'assets/img/elements/5.jpg') }}"
                     alt="{{ $blog->image_tag }}">
                 <p id="article-text">{{ $blog->blog_description }}</p>
             </div>
@@ -38,17 +39,19 @@
                 <div class="card-hearder">
                     <h3>Related Articles</h3>
                 </div>
-                @foreach ($relatedPosts as $related)
-                    <div class="">
-                        <h5>{{ $related->blog_title }}</h5>
+                @if ($relatedPosts)
+                    @foreach ($relatedPosts as $related)
+                        <div class="">
+                            <h5>{{ $related->blog_title }}</h5>
 
-                        <img class="img-fluid w-100"
-                            src="{{ asset($related->cover_image ?? 'assets/img/elements/5.jpg') }}"
-                            alt="{{ $related->image_tag }}">
+                            <img class="img-fluid w-100"
+                                src="{{ asset('ImageFolder/' .$related->cover_image ?? 'assets/img/elements/5.jpg') }}"
+                                alt="{{ $related->image_tag }}">
                             <a href="{{ route('web.blog', $related->id) }}" class="btn btn-primary w-100">Read This</a>
-                    </div>
-                    <hr style="">
-                @endforeach
+                        </div>
+                        <hr style="">
+                    @endforeach
+                @endif
             </div>
 
             @if ($comments->count())

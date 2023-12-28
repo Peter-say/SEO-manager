@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                     <img class="img-fluid dashboard-blog-list w-100"
-                        src="{{ asset($blog->cover_image ?? 'assets/img/elements/5.jpg') }}" alt="">
+                        src="{{ asset('ImageFolder/' .$blog->cover_image ?? 'assets/img/elements/5.jpg') }}" alt="">
                 </div>
                 <div class="col-12 d-flex justify-content-right ">
                     <a href="{{ route('blog.show', $blog->id) }}" class="btn btn-secondary btn-sm text-sm m-2">View</a>

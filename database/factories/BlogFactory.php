@@ -13,10 +13,13 @@ class BlogFactory extends Factory
      */
     public function definition()
     {
+        $cover_image = glob(public_path('ImageFolder/*'));
+        $randonCoverImages = basename($cover_image[array_rand($cover_image)]);
+
         return [
             'user_id' => 1,
-            'category_id' => 1,
-            'image' => public_path('assets\img\backgrounds\18.jpg'),
+            'category_id' => mt_rand(1, 2),
+            'cover_image' =>  $randonCoverImages,
             'blog_title' => $this->faker->sentence(),
             'blog_description' => $this->faker->text($maxNBChars = 1000),
             'meta_title' =>  $this->faker->text($maxNBChars = '60'),

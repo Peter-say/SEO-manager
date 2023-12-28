@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class BlogCategoryFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,8 +14,7 @@ class BlogCategoryFactory extends Factory
     public function definition()
     {
         return [
-           'image' => public_path('assets\img\backgrounds\18.jpg'),
-           'name' => $this->faker->text($maxNBChars = 10)
+           'label' => $this->faker->text($maxNBChars = 10)
         ];
     }
 }

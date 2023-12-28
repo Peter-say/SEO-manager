@@ -35,8 +35,7 @@ class Metadata
     public static function appMetaTitle()
     {
        
-        $meta_title = WebsiteMetaTitle::APP_NAME;
-        // dd($meta_title);
+        $meta_title = (new WebsiteMetaTitle)->appName();
         $app_title = $meta_title;
         return $app_title;
     }

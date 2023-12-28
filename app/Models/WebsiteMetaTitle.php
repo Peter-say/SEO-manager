@@ -11,6 +11,10 @@ class WebsiteMetaTitle extends Model
 
     protected $guarded = [];
 
-    const APP_NAME = 'Lolol';
+
+    public function appName()
+    {
+        return $this->meta_title;
+    }
 
 }
